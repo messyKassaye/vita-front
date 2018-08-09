@@ -7,6 +7,9 @@ export class CustomFormsService {
 
   constructor(private app:AppService) { }
   
+  index(){
+    return this.app.get(apiRoutes.customForms.index);
+  }
   create(form){
     const datas=JSON.stringify({
       title:form.value.title,

@@ -1,3 +1,17 @@
-<p>
-  show-forms works!
-</p>
+
+<h4 color="primary" style="padding: 10px;">All Forms</h4>
+<div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" style="padding: 10px;">
+  <ng-container *ngFor="let fm of forms">
+    <div fxFlex='25'>
+      <mat-card [routerLink]="['/auth/custom-forms/form-detail',fm.id]" style="cursor: pointer;">
+        <mat-card-title>{{fm.title}}</mat-card-title>
+          <mat-card-footer>
+            <mat-divider></mat-divider>
+            <div style="padding-left: 20px;">
+                <P>No records Found</P>
+            </div>
+          </mat-card-footer>
+      </mat-card>
+    </div>
+  </ng-container>
+</div>

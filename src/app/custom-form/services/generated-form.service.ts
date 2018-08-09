@@ -9,7 +9,7 @@ export class GeneratedFormService {
 
   constructor(private app:AppService) { }
 
-  store(form_ids:any,htmlDocument:any){
+  store(form_ids:any,htmlDocument:string){
     var datas=JSON.stringify({
       form_id:form_ids,
       html_document:htmlDocument

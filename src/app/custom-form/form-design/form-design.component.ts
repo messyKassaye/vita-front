@@ -8,6 +8,7 @@ import { printError } from 'ts-node';
 import { event, json } from 'd3';
 import { FormColumnsService } from '../services/form-columns.service';
 import { GeneratedFormService } from '../services/generated-form.service';
+import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { ElementRef } from '@angular/core';
 import { BrowserDomAdapter } from '@angular/platform-browser/src/browser/browser_adapter';
@@ -26,8 +27,10 @@ export class FormDesignComponent implements OnInit,OnDestroy,AfterViewInit {
   private sub:any;
   private sections:Array<FormSections>=[];
   private columnName:Array<any>=[];
+  private generatedHtml:string;
+  private status:boolean=false;
   constructor(private route:ActivatedRoute,private http:CustomFormsService,private sectionsHttp:FormSectionsService,private element:ElementRef,
-  private formColumnApi:FormColumnsService,private generatedFormApi:GeneratedFormService) { 
+  private formColumnApi:FormColumnsService,private generatedFormApi:GeneratedFormService,private router:Router) { 
   }
 
   ngOnInit() {
@@ -177,8 +180,9 @@ $('#dragCopy').bind('drop', function(e) {
 
 save(){
  
-  console.log(this.element.nativeElement.querySelector('#dragCopy'));
-
+  //console.log(this.element.nativeElement.querySelector('#dragCopy').toString);
+  this.generatedHtml= $(document).find('#dragCopy').wrap('<p/>').parent().html().toString();
+  $(document).find('#dragCopy').unwrap();
   //finding each input type name for our column creation of form builder
   $(document).ready(()=>{
     var json=[];
@@ -191,13 +195,23 @@ save(){
     }
   });
   //end of finding columns
+
+
+  //saving generated forms
+this.generatedFormApi.store(this.id,this.generatedHtml)
+.subscribe(data=>{
+ if(data){
+   //saving table columns after saving generated form
   this.formColumnApi.store(this.id,this.columnName.toString())
   .subscribe(data=>{
-    
+    this.router.navigate(['/auth/custom-forms/form-detail',this.id]);
   });
-this.generatedFormApi.store(this.id,this.element.nativeElement.querySelector('#dragCopy')).subscribe(data=>{
-  console.log(data);
+//end of saving generated form
+ }
+
 });
+//end of saving generated forms
+
 
 }
 }
