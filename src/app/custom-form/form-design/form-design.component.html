@@ -30,7 +30,7 @@
           
           <div>
             <ul class="list-group">
-              <li data="<div id='holder' draggable='true'><label class='editable' >Text name</label></div>"  id="drag1" class="list-group-item" draggable="true"><span class="fa fa-font"> Text</span></li>
+              <li data="<div style='padding-left:15px;' id='holder' draggable='true'><label class='editable' >Text name</label><p style='display:none;'><span class='btn-link edit'>Edit</span> <span class='btn-link remove' style='margin-left:15px;'>Remove</span></p></div>"  id="drag1" class="list-group-item" draggable="true"><span class="fa fa-font"> Text</span></li>
               <li data="<input type='text' placeholder='write the thing you want to accept' id='drope-input'>" id="input-drager" class="list-group-item" draggable="true"><span class="fa fa-wpforms"> Text Field</span></li>
               <li data="<div><table id='customers' style='border-collapse: collapse;text-align:center;'>
                 <thead>
@@ -58,7 +58,7 @@
                   </tr>
                 </tbody>
               </table>
-              <div class='pull-right'><button id='success' class='fa fa-plus add-column'>  add column</button></div>
+              <div class='pull-right' id='button-div'><button id='success' class='fa fa-plus add-column'>  add column</button></div>
             </div>" 
             id="table-drager" class="list-group-item" draggable="true"><span class="fa fa-table"> Table</span></li>
               <li id="message-drager" data="<div id='holder' draggable='true'><p class='message-editable' >write message</p></div>" class="list-group-item" draggable="true"><span class="fa fa-comment"> Message</span></li>
@@ -70,8 +70,10 @@
         </div>
 
 
-        <div class="item item-2" fxLayout="column"  fxFlex="70%" fxFlexOrder="3" id="dragCopy">
-          
+        <div class="item item-2" fxLayout="column"  fxFlex="70%" fxFlexOrder="3">
+          <div id="dragCopy">
+
+          </div>
         </div>
     </div>
 </div>

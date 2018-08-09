@@ -75,6 +75,7 @@ $('#table-drager').bind('dragstart', function(e) {
   //label development started
 
   //editing label on click of label in jquery
+  $(document).find('#dragCopy').css('border','1px solid gray');
   $(document).on('click', "div>label.editable", function() { 	
     var $lbl = $(this), o = $lbl.text(),
      $txt = $('<input type="text" class="editable-label-text" value="'+o+'" />');
@@ -113,7 +114,23 @@ $txt.blur(function() {
 });
 }); //end of label editing
 
+//mouse enter and leave for label
+$(document).on('mouseenter','div#holder',function(){
+  $(this).css('border','1px solid gray');
+  $(this).find('p').css('display','block');
+});
+
+$(document).on('mouseleave','div#holder',function(){
+  $(this).css('border','none');
+  $(this).find('p').css('display','none');
+});
+$(document).on('click','div>p>span.remove',function(){
+$(this).parent().parent().remove();
+});
+
 //end of label development
+
+//input handling starts here
 $(document).on('keyup','#dragCopy>input',function(){
   var text=$(this).val();
   $(this).attr('placeholder',text);
@@ -125,6 +142,8 @@ $(document).on('click','.add-column',function(){
  $('#customers>thead>tr').append('<th>Colum name</th>');
  $('#customers>tbody>tr').append("<td><input class='table-input'></td>");
 });
+
+//end of input handling
 
 //message drager startes here
 $('#message-drager').bind('dragstart', function(e) {
@@ -184,7 +203,6 @@ save(){
   
     $(document).ready(()=>{
 
-      this.generatedHtml= $(document).find('#dragCopy').wrap('<p/>').parent().html().toString();
   var result=$(document).find('#dragCopy').find('div>table');
   if(result.length<=0){
     $(document).find('#dragCopy').unwrap();
@@ -198,6 +216,7 @@ save(){
         this.columnName.push(json[i]);
       }
         //saving generated forms
+        this.generatedHtml= $(document).find('#dragCopy').wrap('<p/>').parent().html().toString();
     this.generatedFormApi.store(this.id,this.generatedHtml)
     .subscribe(data=>{
     if(data){
@@ -211,6 +230,8 @@ save(){
     
     });
     }else if(result.length>0){
+      $(document).find('.add-column').remove();
+      $(document).find('#dragCopy').css('border','none');
       var tableColmnName=[];
       var table=$(document).find('#dragCopy').find('div>table>thead>tr>th').each(function(){
         var label=$(this).text();
@@ -219,20 +240,22 @@ save(){
       for(var i=0;i<tableColmnName.length;i++){
         this.columnName.push(tableColmnName[i]);
       }
-      this.generatedFormApi.store(this.id,this.generatedHtml)
-      .subscribe(data=>{
-       if(data){
-         //saving table columns after saving generated form
-        this.formColumnApi.store(this.id,this.columnName.toString())
+      if($(document).find('.add-column').length<=0){
+        $(document).find('#button-div').append("<button id='success' class='fa fa-plus add-row'>Add row</button>");
+        this.generatedHtml= $(document).find('#dragCopy').wrap('<p/>').parent().html().toString();
+        this.generatedFormApi.store(this.id,this.generatedHtml)
         .subscribe(data=>{
-          this.router.navigate(['/auth/custom-forms/form-detail',this.id]);
+         if(data){
+           //saving table columns after saving generated form
+          this.formColumnApi.store(this.id,this.columnName.toString())
+          .subscribe(data=>{
+            this.router.navigate(['/auth/custom-forms/form-detail',this.id]);
+          });
+        //end of saving generated form
+         }
+        
         });
-      //end of saving generated form
-       }
-      
-      });
-  
-  
+      }
      }else{
   
      }

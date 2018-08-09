@@ -1,7 +1,7 @@
 
 <h4 color="primary" style="padding: 10px;">All Forms</h4>
-<div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" style="padding: 10px;">
-  <ng-container *ngFor="let fm of forms">
+<div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px" style="padding: 10px;" >
+  <ng-container *ngFor="let fm of forms" >
     <div fxFlex='25'>
       <mat-card [routerLink]="['/auth/custom-forms/form-detail',fm.id]" style="cursor: pointer;">
         <mat-card-title>{{fm.title}}</mat-card-title>

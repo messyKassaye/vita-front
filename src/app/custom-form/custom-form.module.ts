@@ -19,6 +19,7 @@ import { FormColumnsService } from './services/form-columns.service';
 import { GeneratedFormService } from './services/generated-form.service';
 import { FormsdetailComponent } from './formsdetail/formsdetail.component';
 import { ShareDialogComponent } from './share-dialog/share-dialog.component';
+import { AddRecordsComponent } from './add-records/add-records.component';
 
 const formsRoute:Routes=[
   {
@@ -38,6 +39,10 @@ const formsRoute:Routes=[
   {
     path:'form-detail/:id',
     component:FormsdetailComponent
+  },
+  {
+    path:'add-records/:id',
+    component:AddRecordsComponent
   }
 ]
 @NgModule({
@@ -48,8 +53,10 @@ const formsRoute:Routes=[
     HttpClientModule,
     RouterModule.forChild(formsRoute)
   ],
-  declarations: [FormsDashboardComponent, ShowFormsComponent, DialogBodyComponent,FormDesignComponent, DraggableComponent,EscapeHtmlPipe, FormsdetailComponent, ShareDialogComponent],
-  exports:[FormsDashboardComponent, ShowFormsComponent,DialogBodyComponent,FormDesignComponent,DraggableComponent,FormsdetailComponent,ShareDialogComponent],
+  declarations: [FormsDashboardComponent, ShowFormsComponent, DialogBodyComponent,FormDesignComponent, DraggableComponent,EscapeHtmlPipe, 
+    FormsdetailComponent, ShareDialogComponent, AddRecordsComponent],
+  exports:[FormsDashboardComponent, ShowFormsComponent,DialogBodyComponent,FormDesignComponent,DraggableComponent,FormsdetailComponent,
+    ShareDialogComponent,AddRecordsComponent],
   providers:[CustomFormsService,FormSectionsService,FormColumnsService,GeneratedFormService],
   entryComponents:[DialogBodyComponent,FormDesignComponent,ShareDialogComponent]
 })

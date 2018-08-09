@@ -16,4 +16,8 @@ export class GeneratedFormService {
     });
    return this.app.post(apiRoutes.generatedForm.store,datas);
   }
+
+  show(id){
+    return this.app.show(apiRoutes.generatedForm.show,id);
+  }
 }

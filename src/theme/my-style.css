@@ -2,14 +2,17 @@
     padding-top: 20px;
     padding-left: 20px;
     padding-right: 20px;
-    border: 1px solid gray;
     height: auto;
     overflow: auto;
     padding-bottom: 50px;
+    position: relative;
+    width: auto;
 }
+
 #dragCopy>input{
     margin: 20px;
     padding: 10px;
+    width: 60%;
 
 }
 #dragCopy>div>label.editable{
@@ -322,4 +325,41 @@ table {
     .table-responsive > .table-bordered > tfoot > tr:last-child > td {
       border-bottom: 0;
     }
+  }
+
+  .btn-link {
+    font-weight: normal;
+    color: #337ab7;
+    border-radius: 0;
+  }
+  .btn-link,
+  .btn-link:active,
+  .btn-link.active,
+  .btn-link[disabled],
+  fieldset[disabled] .btn-link {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+  .btn-link,
+  .btn-link:hover,
+  .btn-link:focus,
+  .btn-link:active {
+    border-color: transparent;
+  }
+  .btn-link:hover,
+  .btn-link:focus {
+    color: #23527c;
+    text-decoration: underline;
+    background-color: transparent;
+  }
+  .btn-link[disabled]:hover,
+  fieldset[disabled] .btn-link:hover,
+  .btn-link[disabled]:focus,
+  fieldset[disabled] .btn-link:focus {
+    color: #777;
+    text-decoration: none;
+  }
+  p>span{
+    cursor: pointer;
   }
