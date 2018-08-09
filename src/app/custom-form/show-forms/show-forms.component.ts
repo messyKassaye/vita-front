@@ -15,7 +15,7 @@ export class ShowFormsComponent implements OnInit {
     this.form.index().subscribe((data:Array<Forms>)=>{
       this.forms=data['data'];
     });
-    console.log(this.forms);
+  
   }
 
 }

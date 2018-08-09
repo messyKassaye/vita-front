@@ -17,6 +17,10 @@ export class FormColumnsService {
    return this.app.post(apiRoutes.formColumn.store,datas);
   }
 
+  show(id){
+    return this.app.show(apiRoutes.formColumn.show,id);
+  }
+
   update(){
 
   }

@@ -5,7 +5,7 @@ import { CustomFormsService } from '../custom-forms.service';
 import { FormSectionsService } from '../form-sections.service';
 import { FormSections } from '../../models/sections';
 import { printError } from 'ts-node';
-import { event, json } from 'd3';
+import { event, json, lab } from 'd3';
 import { FormColumnsService } from '../services/form-columns.service';
 import { GeneratedFormService } from '../services/generated-form.service';
 import { Router } from '@angular/router';
@@ -181,37 +181,63 @@ $('#dragCopy').bind('drop', function(e) {
 save(){
  
   //console.log(this.element.nativeElement.querySelector('#dragCopy').toString);
-  this.generatedHtml= $(document).find('#dragCopy').wrap('<p/>').parent().html().toString();
-  $(document).find('#dragCopy').unwrap();
-  //finding each input type name for our column creation of form builder
-  $(document).ready(()=>{
-    var json=[];
-    $(document).find('#dragCopy').find('input[type=text]').each(function(){
-      var name= $(this).attr('name');
-      json.push(name); 
-    });
-    for(var i=0;i<json.length;i++){
-      this.columnName.push(json[i]);
+  
+    $(document).ready(()=>{
+
+      this.generatedHtml= $(document).find('#dragCopy').wrap('<p/>').parent().html().toString();
+  var result=$(document).find('#dragCopy').find('div>table');
+  if(result.length<=0){
+    $(document).find('#dragCopy').unwrap();
+    //finding each input type name for our column creation of form builder
+      var json=[];
+      $(document).find('#dragCopy').find('input[type=text]').each(function(){
+        var name= $(this).attr('name');
+        json.push(name); 
+      });
+      for(var i=0;i<json.length;i++){
+        this.columnName.push(json[i]);
+      }
+        //saving generated forms
+    this.generatedFormApi.store(this.id,this.generatedHtml)
+    .subscribe(data=>{
+    if(data){
+      //saving table columns after saving generated form
+      this.formColumnApi.store(this.id,this.columnName.toString())
+      .subscribe(data=>{
+        this.router.navigate(['/auth/custom-forms/form-detail',this.id]);
+      });
+    //end of saving generated form
     }
-  });
-  //end of finding columns
+    
+    });
+    }else if(result.length>0){
+      var tableColmnName=[];
+      var table=$(document).find('#dragCopy').find('div>table>thead>tr>th').each(function(){
+        var label=$(this).text();
+        tableColmnName.push(label);
+      });
+      for(var i=0;i<tableColmnName.length;i++){
+        this.columnName.push(tableColmnName[i]);
+      }
+      this.generatedFormApi.store(this.id,this.generatedHtml)
+      .subscribe(data=>{
+       if(data){
+         //saving table columns after saving generated form
+        this.formColumnApi.store(this.id,this.columnName.toString())
+        .subscribe(data=>{
+          this.router.navigate(['/auth/custom-forms/form-detail',this.id]);
+        });
+      //end of saving generated form
+       }
+      
+      });
+  
+  
+     }else{
+  
+     }
 
-
-  //saving generated forms
-this.generatedFormApi.store(this.id,this.generatedHtml)
-.subscribe(data=>{
- if(data){
-   //saving table columns after saving generated form
-  this.formColumnApi.store(this.id,this.columnName.toString())
-  .subscribe(data=>{
-    this.router.navigate(['/auth/custom-forms/form-detail',this.id]);
-  });
-//end of saving generated form
- }
-
-});
-//end of saving generated forms
-
-
+    });
+    //end of finding columns
 }
 }

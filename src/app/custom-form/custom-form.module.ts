@@ -18,6 +18,7 @@ import { EscapeHtmlPipe } from './pipes/keepHtmlSafe.pipe';
 import { FormColumnsService } from './services/form-columns.service';
 import { GeneratedFormService } from './services/generated-form.service';
 import { FormsdetailComponent } from './formsdetail/formsdetail.component';
+import { ShareDialogComponent } from './share-dialog/share-dialog.component';
 
 const formsRoute:Routes=[
   {
@@ -47,9 +48,9 @@ const formsRoute:Routes=[
     HttpClientModule,
     RouterModule.forChild(formsRoute)
   ],
-  declarations: [FormsDashboardComponent, ShowFormsComponent, DialogBodyComponent,FormDesignComponent, DraggableComponent,EscapeHtmlPipe, FormsdetailComponent],
-  exports:[FormsDashboardComponent, ShowFormsComponent,DialogBodyComponent,FormDesignComponent,DraggableComponent,FormsdetailComponent],
+  declarations: [FormsDashboardComponent, ShowFormsComponent, DialogBodyComponent,FormDesignComponent, DraggableComponent,EscapeHtmlPipe, FormsdetailComponent, ShareDialogComponent],
+  exports:[FormsDashboardComponent, ShowFormsComponent,DialogBodyComponent,FormDesignComponent,DraggableComponent,FormsdetailComponent,ShareDialogComponent],
   providers:[CustomFormsService,FormSectionsService,FormColumnsService,GeneratedFormService],
-  entryComponents:[DialogBodyComponent,FormDesignComponent]
+  entryComponents:[DialogBodyComponent,FormDesignComponent,ShareDialogComponent]
 })
 export class CustomFormModule { }

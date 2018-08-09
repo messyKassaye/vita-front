@@ -5,9 +5,26 @@
       
         <!-- This fills the remaining space of the current row -->
         <span class="example-fill-remaining-space"></span>
-      </mat-toolbar>
-  
+        <button mat-button (click)="openShareDialog()"><mat-icon>share</mat-icon> Share</button>
+        <button mat-button><mat-icon>assessment</mat-icon> Field and sections</button>
+        <button mat-button><mat-icon>edit</mat-icon> Edit</button>
+      </mat-toolbar >
+       
       <mat-toolbar>
+          <span class="example-fill-remaining-space"></span>
+          <button mat-button color="primary"><mat-icon>add</mat-icon>Add records</button>
+          <button mat-button color="primary"><mat-icon>import_export</mat-icon>Import</button>
       </mat-toolbar>
+      <table class="table table-hover table-bordered" style="width: 100%;">
+        <thead>
+          <tr >
+            <th style="text-transform: capitalize;" *ngFor="let c of columnName">{{c}}</th>
+          </tr>
+        </thead>
+        <tbody style="text-align: center;">
+          <span style="text-align: center;padding: 20px;font-size: 20px;">No records found</span>
+        </tbody>
+      </table>
+      
       </div>
       </div>
