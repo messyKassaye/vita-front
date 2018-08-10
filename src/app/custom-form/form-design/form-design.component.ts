@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { ElementRef } from '@angular/core';
 import { BrowserDomAdapter } from '@angular/platform-browser/src/browser/browser_adapter';
+import { $$iterator } from 'rxjs/internal/symbol/iterator';
 
 declare var $:any;
 @Component({
@@ -97,7 +98,8 @@ $('#table-drager').bind('dragstart', function(e) {
 
 $(document).on('click', "table>thead>tr>th", function() { 	
   var $lbl = $(this), o = $lbl.text(),
-  $txt = $('<input type="text" class="editable-label-text" value="'+o+'" />');
+  $txt = $('<input type="text"  class="editable-label-text" value="'+o+'" />');
+
 $lbl
 .replaceWith($txt);
 $txt.focus();

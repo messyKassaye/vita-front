@@ -5,11 +5,13 @@
       <span *ngFor="let fm of myForm">
         <span>{{fm.title}}</span>
       </span>
+      
       <span class="example-fill-remaining-space"></span>
-      <button mat-raised-button color="primary" style="margin-left: 10px;" (click)="openDialog()"><mat-icon iconsmall>send</mat-icon> Send</button>
+      <span class="text-success" style="margin-right: 100px;font-size: 18px;">{{message}}</span>
+      <button mat-raised-button color="primary" style="margin-left: 10px;" (click)="saveData()"><mat-icon iconsmall>send</mat-icon> Send</button>
     </mat-toolbar>
     <div *ngFor="let html of generatedForm">
-      <div [innerHTML]="html.html_document | keepHtml">
+      <div [innerHTML]="html.html_document | inputSanitizer">
     
       </div>
     </div>

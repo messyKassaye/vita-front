@@ -124,6 +124,14 @@ const createGeneratedForm = {
   destroy: createUrl('/generated-form')
 };
 
+const createFormsData = {
+  index: createUrl('/form-data'),
+  show: createUrl('/form-data'),
+  store: createUrl('/form-data'),
+  update: createUrl('/form-data'),
+  destroy: createUrl('/form-data')
+};
+
 const userRoutes = {
   me: createAuthUrl('/me'),
   users: createAuthUrl('/users')
@@ -152,7 +160,8 @@ export const apiRoutes = {
   customForms:createCustomForms,
   formSections:createFormSections,
   formColumn:createFormColumns,
-  generatedForm:createGeneratedForm
+  generatedForm:createGeneratedForm,
+  formsData:createFormsData
 };
 
 

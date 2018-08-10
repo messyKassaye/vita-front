@@ -20,6 +20,8 @@ import { GeneratedFormService } from './services/generated-form.service';
 import { FormsdetailComponent } from './formsdetail/formsdetail.component';
 import { ShareDialogComponent } from './share-dialog/share-dialog.component';
 import { AddRecordsComponent } from './add-records/add-records.component';
+import { InputSanitizerPipe } from './pipes/input-sanitizer.pipe';
+import { FormsDataService } from './services/forms-data.service';
 
 const formsRoute:Routes=[
   {
@@ -54,10 +56,10 @@ const formsRoute:Routes=[
     RouterModule.forChild(formsRoute)
   ],
   declarations: [FormsDashboardComponent, ShowFormsComponent, DialogBodyComponent,FormDesignComponent, DraggableComponent,EscapeHtmlPipe, 
-    FormsdetailComponent, ShareDialogComponent, AddRecordsComponent],
+    FormsdetailComponent, ShareDialogComponent, AddRecordsComponent, InputSanitizerPipe],
   exports:[FormsDashboardComponent, ShowFormsComponent,DialogBodyComponent,FormDesignComponent,DraggableComponent,FormsdetailComponent,
     ShareDialogComponent,AddRecordsComponent],
-  providers:[CustomFormsService,FormSectionsService,FormColumnsService,GeneratedFormService],
+  providers:[CustomFormsService,FormSectionsService,FormColumnsService,GeneratedFormService,FormsDataService],
   entryComponents:[DialogBodyComponent,FormDesignComponent,ShareDialogComponent]
 })
 export class CustomFormModule { }
