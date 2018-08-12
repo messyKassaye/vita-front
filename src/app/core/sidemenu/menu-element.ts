@@ -168,7 +168,7 @@ export const menus = [
       },
       {
         'name': 'custom-forms',
-        'icon': 'settings',
+        'icon': 'input',
         'link': '/auth/custom-forms',
         'open': false,
     },

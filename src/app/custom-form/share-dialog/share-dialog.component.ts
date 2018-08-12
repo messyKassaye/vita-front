@@ -2,6 +2,7 @@ import { Forms } from '../../models/forms';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Form, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ProjectService } from '../../master-modules/project-module/project.service';
 
 @Component({
   selector: 'app-share-dialog',
@@ -10,7 +11,8 @@ import { Form, FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class ShareDialogComponent implements OnInit {
   shareForm:FormGroup;
-  options: string[] = ['One', 'Two', 'Three'];
+  options: string[] = ['Meseret', 'Ezedin', 'Lule'];
+  projects: string[] = ['EU konso', 'Agriculture', 'Health in SNNP'];
   constructor(@Inject(MAT_DIALOG_DATA) public data: string
   ,private dialogref:MatDialogRef<ShareDialogComponent>,private formbuilder:FormBuilder) { }
 

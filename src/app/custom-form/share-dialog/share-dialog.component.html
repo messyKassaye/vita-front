@@ -16,11 +16,11 @@
     <h4 style="color: #242424">Projects:</h4>
     <p style="margin-top: -20px;color: gray;">Every selected users who has the selected project will have access to this custom form</p>
     <mat-form-field style="width: 100%;">
-      <input type="text" matInput  [matAutocomplete]="auto" placeholder="Select project" formControlName="projects" name="projects">
+      <input type="text" matInput  [matAutocomplete]="autos" placeholder="Select project" formControlName="projects" name="projects">
     </mat-form-field>
     
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let option of options" [value]="option">{{option}}</mat-option>
+    <mat-autocomplete #autos="matAutocomplete">
+      <mat-option *ngFor="let pr of projects" [value]="pr">{{pr}}</mat-option>
     </mat-autocomplete>
 
   </mat-dialog-content>

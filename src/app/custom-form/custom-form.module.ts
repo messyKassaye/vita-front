@@ -22,6 +22,7 @@ import { ShareDialogComponent } from './share-dialog/share-dialog.component';
 import { AddRecordsComponent } from './add-records/add-records.component';
 import { InputSanitizerPipe } from './pipes/input-sanitizer.pipe';
 import { FormsDataService } from './services/forms-data.service';
+import { ProjectService } from '../master-modules/project-module/project.service';
 
 const formsRoute:Routes=[
   {
@@ -59,7 +60,7 @@ const formsRoute:Routes=[
     FormsdetailComponent, ShareDialogComponent, AddRecordsComponent, InputSanitizerPipe],
   exports:[FormsDashboardComponent, ShowFormsComponent,DialogBodyComponent,FormDesignComponent,DraggableComponent,FormsdetailComponent,
     ShareDialogComponent,AddRecordsComponent],
-  providers:[CustomFormsService,FormSectionsService,FormColumnsService,GeneratedFormService,FormsDataService],
+  providers:[CustomFormsService,FormSectionsService,FormColumnsService,GeneratedFormService,FormsDataService,ProjectService],
   entryComponents:[DialogBodyComponent,FormDesignComponent,ShareDialogComponent]
 })
 export class CustomFormModule { }

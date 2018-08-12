@@ -15,16 +15,19 @@
           <button mat-button color="primary" [routerLink]="['/auth/custom-forms/add-records',id]"><mat-icon>add</mat-icon>Add records</button>
           <button mat-button color="primary"><mat-icon>import_export</mat-icon>Import</button>
       </mat-toolbar>
-      <table class="table table-hover table-bordered" style="width: 100%;">
-        <thead>
-          <tr >
-            <th style="text-transform: capitalize;" *ngFor="let c of columnName">{{c}}</th>
-          </tr>
-        </thead>
-        <tbody style="text-align: center;">
-          <span style="text-align: center;padding: 20px;font-size: 20px;">No records found</span>
-        </tbody>
-      </table>
-      
+        <div style="height: auto;overflow: auto;">
+          <table class="table table-hover table-bordered" style="width: 100%;">
+            <thead>
+              <tr >
+                <th style="text-transform: capitalize;" *ngFor="let c of columnName">{{c}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of json;">
+                <td *ngFor="let co of columnName;">{{data[co]}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       </div>

@@ -16,4 +16,8 @@ export class FormsDataService {
     });
    return this.app.post(apiRoutes.formsData.store,datas);
   }
+
+  show(id){
+    return this.app.show(apiRoutes.formsData.show,id);
+  }
 }

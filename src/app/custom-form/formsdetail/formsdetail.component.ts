@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { Columns } from '../../models/columns';
 import { FormColumnsService } from '../services/form-columns.service';
 import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
+import { FormsDataService } from '../services/forms-data.service';
+import { FormData } from '../../models/formData';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 
 
@@ -20,7 +22,11 @@ export class FormsdetailComponent implements OnInit {
   private myForm:Array<Forms>=[];
    myColumn:Array<Columns>=[];
    columnName:Array<string>=[];
-  constructor(private route:ActivatedRoute,private customForm:CustomFormsService,private columnsHtpp:FormColumnsService,private dialog:MatDialog) {
+   formDataList:Array<FormData>=[];
+   tableRowData:string;
+   json:any;
+  constructor(private route:ActivatedRoute,private customForm:CustomFormsService,private columnsHtpp:FormColumnsService,private dialog:MatDialog,
+            private formDataHttp:FormsDataService) {
    }
 
   ngOnInit() {
@@ -35,6 +41,12 @@ export class FormsdetailComponent implements OnInit {
     this.columnsHtpp.show(this.id).subscribe(data=>{
       this.myColumn=data['data'];
      this.columnName= this.myColumn[0].columns.split(',');
+    });
+
+    this.formDataHttp.show(this.id).subscribe(data=>{
+      this.formDataList=data['data'];
+      this.tableRowData=this.formDataList[0]['data'];
+      this.json=JSON.parse(this.tableRowData.toString());
     });
     
   }

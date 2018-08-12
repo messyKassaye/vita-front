@@ -6,6 +6,9 @@ import { CustomFormsService } from '../custom-forms.service';
 import { Forms } from '../../models/forms';
 import $ from "jquery";
 import { FormsDataService } from '../services/forms-data.service';
+import { Columns } from '../../models/columns';
+import { FormColumnsService } from '../services/form-columns.service';
+
 @Component({
   selector: 'app-add-records',
   templateUrl: './add-records.component.html',
@@ -18,8 +21,12 @@ export class AddRecordsComponent implements OnInit {
   private myForm:Array<Forms>=[];
   private tableData:Array<any>=[];
   private message:string;
+  private loading:boolean=false;
+  private submited:boolean=false;
+  myColumn:Array<Columns>=[];
+   columnName:Array<string>=[];
   constructor(private route:ActivatedRoute,private generateHttp:GeneratedFormService,private customForm:CustomFormsService,
-    private formDataHttp:FormsDataService,private router:Router) { }
+    private formDataHttp:FormsDataService,private router:Router,private columnHttp:FormColumnsService) { }
 
   ngOnInit() {
     this.sub= this.route.params.subscribe(params=>{
@@ -28,13 +35,20 @@ export class AddRecordsComponent implements OnInit {
 
     this.generateHttp.show(this.id).subscribe(data=>{
       this.generatedForm=data['data'];
-      console.log(this.generatedForm);
     })
     this.customForm.show(this.id).subscribe((data:Array<Forms>)=>{
       this.myForm=data['data'];
     },error=>{
       
     });
+
+    this.columnHttp.show(this.id).subscribe(data=>{
+      this.myColumn=data['data'];
+      this.columnName= this.myColumn[0].columns.split(',');
+    });
+
+
+    //adading row to table 
     $(document).ready(()=>{
       $(document).on('click','.add-row',function(){
        var columnLength=$(document).find('table>thead>tr>th').length;
@@ -46,38 +60,66 @@ export class AddRecordsComponent implements OnInit {
       });
      
     });
+    //end of adding row to each table 
 
   }
 
   saveData(){
-   $(document).ready(()=>{
 
-  var array = [];
-  var headers = [];
+    this.loading=true;
+    this.submited=true;
+
+    var inputNumber=$(document).find('#dragCopy').find('input').length;
+    if(inputNumber>0){
+      var fileInput=$(document).find('#dragCopy').find('input[type=file]').length;
+      if(fileInput>0){
+
+      }else{
+
+        $(document).ready(()=>{
+          var inputJSON=[];
+          var inputItem={};
+          $(document).find('input[type=text],input[type=file],select').each(function(index,item){
+            inputItem[$(this).attr('name')]=$(item).val();
+           });
+           inputJSON.push(inputItem);
+           var myJSOn=JSON.stringify(inputJSON);
+           this.formDataHttp.store(this.id,myJSOn.toString()).subscribe(data=>{
+            this.loading=false;
+          this.message=data['message'];
+          location.reload();
+           }); 
+         });
+      }
+    }else{
+      $(document).ready(()=>{
+    
+        var array = [];
+        var headers = [];
+        
+        $('table thead tr th>label').each(function(index, item) {
+            headers[index] = $(item).html();
+        });
+        $('table tr').has('td').each(function() {
+            var arrayItem = {};
+            $('td>input', $(this)).each(function(index, item) {
+                arrayItem[headers[index]] = $(item).val();
+            });
+            array.push(arrayItem);
+        });
+        for(var i=0;i<array.length;i++){
+          this.tableData.push(array[i]);
+        }
+        var tableJSON= JSON.stringify(this.tableData);
+        this.formDataHttp.store(this.id,tableJSON.toString()).subscribe(data=>{
+          this.loading=false;
+          this.message=data['message'];
+          location.reload();
+        });
+      
+         });
+    }
   
-  $('table thead tr th').each(function(index, item) {
-      headers[index] = $(item).html();
-  });
-  $('table tr').has('td').each(function() {
-      var arrayItem = {};
-      $('td>input', $(this)).each(function(index, item) {
-          arrayItem[headers[index]] = $(item).val();
-      });
-      array.push(arrayItem);
-  });
-  for(var i=0;i<array.length;i++){
-    this.tableData.push(array[i]);
-  }
-  var tableJSON= JSON.stringify(this.tableData);
-
-  this.formDataHttp.store(this.id,tableJSON.toString()).subscribe(data=>{
-    this.message=data['message'];
-    setTimeout(() => {
-        location.reload();
-    }, 2000);
-  });
-
-   });
   }
 
 }
