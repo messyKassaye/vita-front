@@ -132,6 +132,30 @@ const createFormsData = {
   destroy: createUrl('/form-data')
 };
 
+const createFormsDataFile = {
+  index: createUrl('/form-data-file'),
+  show: createUrl('/form-data-file'),
+  store: createUrl('/form-data-file'),
+  update: createUrl('/form-data-file'),
+  destroy: createUrl('/form-data-file')
+};
+
+const createUsers = {
+  index: createUrl('/users'),
+  show: createUrl('/users'),
+  store: createUrl('/users'),
+  update: createUrl('/users'),
+  destroy: createUrl('/users')
+};
+
+const createRoles = {
+  index: createUrl('/roles'),
+  show: createUrl('/roles'),
+  store: createUrl('/roles'),
+  update: createUrl('/roles'),
+  destroy: createUrl('/roles')
+};
+
 const userRoutes = {
   me: createAuthUrl('/me'),
   users: createAuthUrl('/users')
@@ -161,7 +185,10 @@ export const apiRoutes = {
   formSections:createFormSections,
   formColumn:createFormColumns,
   generatedForm:createGeneratedForm,
-  formsData:createFormsData
+  formsData:createFormsData,
+  formsDataFile:createFormsDataFile,
+  users:createUsers,
+  roles:createRoles
 };
 
 

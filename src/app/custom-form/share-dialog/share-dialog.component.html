@@ -6,24 +6,23 @@
     <p style="margin-top: -20px;color: gray;">Every selected users will have access to this custom form</p>
     
     <mat-form-field style="width: 100%;">
-      <input type="text" matInput  [matAutocomplete]="auto" placeholder="Select users" formControlName="users" name="users">
+        <mat-select placeholder="Users" formControlName="projects" multiple>
+            <mat-option *ngFor="let user of userData" [value]="user.name" (onSelectionChange)="userSelected(user.id)">{{user.name}}</mat-option>
+          </mat-select>
     </mat-form-field>
-    
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let option of options" [value]="option">{{option}}</mat-option>
-    </mat-autocomplete>
+  
 
     <h4 style="color: #242424">Projects:</h4>
     <p style="margin-top: -20px;color: gray;">Every selected users who has the selected project will have access to this custom form</p>
     <mat-form-field style="width: 100%;">
-      <input type="text" matInput  [matAutocomplete]="autos" placeholder="Select project" formControlName="projects" name="projects">
+      <mat-select placeholder="Projects" formControlName="projects" multiple>
+        <mat-option *ngFor="let pr of projectData" [value]="pr.name" (onSelectionChange)="projectSelected(pr.id)">{{pr.name}}</mat-option>
+      </mat-select>
     </mat-form-field>
-    
-    <mat-autocomplete #autos="matAutocomplete">
-      <mat-option *ngFor="let pr of projects" [value]="pr">{{pr}}</mat-option>
-    </mat-autocomplete>
-
+ 
   </mat-dialog-content>
+
+  <span style="color:red;">{{errorMessage}}</span>
   <mat-dialog-actions>
     <button mat-raised-button  (click)="close()" color="accent">Close</button>
     <button mat-raised-button mat-primary (click)="save()" color="primary">Save</button>

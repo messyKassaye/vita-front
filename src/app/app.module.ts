@@ -24,7 +24,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
     LazyLoadModule,
     CoreModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+
   ],
   providers: [
     AuthService,

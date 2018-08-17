@@ -162,6 +162,16 @@ $(document).on('click','.remove-column',function(){
 $(document).on('click','.remove-table',function(){
   $(this).parent().parent().remove();
 });
+
+$(document).on('click','.attach-file',function(){
+  $(this).css('display','none');
+  $(document).find('#table-file-form').css('display','block');
+});
+
+$(document).on('click','#remove-file-attachment',function(){
+  $(document).find('#table-file-form').css('display','none');
+  $(document).find('.attach-file').css('display','inline-block');
+})
 //end of table handling
 
 
@@ -373,6 +383,10 @@ save(){
       $(document).find('.remove-table').remove();
       $(document).find('#label-editor').remove();
       $(document).find('#dragCopy').css('border','none');
+      $(document).find('#remove-file-attachment').remove();
+      if($(document).find('#table-file-form').css('display')=='none'){
+        $(document).find('#table-file-form').remove();
+      }
       var tableColmnName=[];
       var table=$(document).find('#dragCopy').find('div>table>thead>tr>th').each(function(){
         var label=$(this).text();
@@ -382,7 +396,7 @@ save(){
         this.columnName.push(tableColmnName[i]);
       }
       if($(document).find('.add-column').length<=0){
-        $(document).find('#button-div').append("<button id='success' class='fa fa-plus add-row'>Add row</button>");
+        $(document).find('.table-btn-holder').append("<button id='success' class='fa fa-plus add-row'>Add row</button>");
         this.generatedHtml= $(document).find('#dragCopy').wrap('<p/>').parent().html().toString();
         this.generatedFormApi.store(this.id,this.generatedHtml)
         .subscribe(data=>{

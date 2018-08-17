@@ -7,8 +7,10 @@
         <mat-card-title>{{fm.title}}</mat-card-title>
           <mat-card-footer>
             <mat-divider></mat-divider>
-            <div style="padding-left: 20px;">
-                <P>No records Found</P>
+            <div style="padding: 10px;">
+              <div *ngIf="fm.form_data.length>0;then content else other_content">here is ignored</div>    
+              <ng-template #content>{{fm.form_data.length}} Records Found</ng-template>
+              <ng-template #other_content>No Records Found</ng-template>
             </div>
           </mat-card-footer>
       </mat-card>

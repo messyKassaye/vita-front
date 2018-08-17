@@ -102,8 +102,28 @@ export const menus = [
     {
         'name': 'System users',
         'icon': 'supervisor_account',
-        'link': '/auth/guarded-routes',
+        'link': false,
         'open': false,
+        'sub':[
+            {
+                'name': 'Users',
+                'icon': false,
+                'link': '/auth/system-users',
+                'open': false,
+              },
+              {
+                'name': 'Roles',
+                'icon': false,
+                'link': '/auth/system-users/roles',
+                'open': false,
+              },
+              {
+                'name': 'Permission',
+                'icon': false,
+                'link': '/auth/system-users/permission',
+                'open': false,
+              }
+        ]
     }, {
         'name': 'Report',
         'open': false,

@@ -66,7 +66,19 @@
                   </tr>
                 </tbody>
               </table>
-              <div class='pull-right' id='button-div'><span class='btn-link remove-table'>Remove table</span><button id='success' class='fa fa-plus add-column'>  add column</button></div>
+              <div  id='button-div' style='width:100%;'>
+                <div class='pull-left' style='padding:10px;' >
+                    <div id='table-file-form' style='display:none;'>
+                      <label class='text-info' for='fileToUpload' style='font-size:20px;'>This Form needs file attachment. After you fill the form<br> please attach the files for the filled item</label><br><br>
+                      <span class='btn-link' id='remove-file-attachment' style='font-size:20px;margin-top:20px;color:red !important;'>No need of file attachment</span>
+                    </div>
+                </div>
+                <div class='pull-right table-btn-holder'>
+                  <span class='btn-link remove-table' style='font-size:20px;'>Remove table</span>
+                  <span style='margin-left:10px;margin-right:10px;font-size:20px;' class='btn-link attach-file'>Attach file</span>
+                  <button id='success' class='fa fa-plus add-column' style='font-size:20px;'>  add column</button>
+                </div>
+              </div>
             </div>" 
 
             id="table-drager" class="list-group-item" draggable="true"><span class="fa fa-table"> Table</span></li>
